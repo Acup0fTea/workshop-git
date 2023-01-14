@@ -8,4 +8,5 @@ const Badge = styled.div`
   background-color: var(--pamary-color);
 `
 
+
 export default Badge
