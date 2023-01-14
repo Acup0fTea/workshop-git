@@ -19,6 +19,18 @@ const BillContainer = (): ReactElement => {
       title: 'รายการ',
       dataIndex: 'name',
       key: 'name'
+    },
+    {
+      title: 'หน่วยละ',
+      dataIndex: 'name',
+      key: 'name'
+    },
+    {
+      title: 'จำนวนเงิน',
+      key: 'price',
+      render: (value: Product) =>{
+        return<Text>{value.price * value.quantity}<Text/>
+      }
     }
   ]
 
@@ -64,6 +76,24 @@ const BillContainer = (): ReactElement => {
         </StyledSubHeaderDetail>
         {/* Content */}
         <Table columns={columns} dataSource={dataProducts} pagination={false} />
+      columns={columns}
+      dataSource={dataProducts}
+      pagination={false}
+      summary={(data) => {
+        const total = data.reduce((prev, curr) => prev + curr.price, 0)
+        return (
+          <Table.Summary>
+            <Table.Summary.Row>
+              <Table.Summary.Cell index = {0} colSpan = {3} align = {'right'}>
+                จำนวนเงิน
+              </Table.Summary.Cell>
+              <Table.Summary.Cell index = {1} align = {'center'} >
+                {total}
+              </Table.Summary.Cell>
+            </Table.Summary.Row>
+          </Table.Summary>
+        )
+      }}
       </StyledWrapper>
     </StyledLayout>
   )
